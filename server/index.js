@@ -52,6 +52,28 @@ res.status(200).send({
 })
 
 
+
+app.put("/updateuser/:id",async(req,res)=>{
+
+    try{
+        const {id}=req.params;
+const updateuser=await userPost.findByIdAndUpdate(id,req.body,{
+    new:true
+})
+// console.log(updateuser);
+res.status(200).send({
+    success:true,
+    message:"Data Successfully Updated"
+})
+    }
+    catch(error){
+        res.status(404).send({
+            success:false,
+            message:"Something error Occured"
+        })
+    }
+})
+
 const PORT = process.env.PORT || 8080
 
 app.listen(PORT,(connection)=> {
