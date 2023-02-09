@@ -12,7 +12,26 @@ app.get("/",(req,res)=> {
     res.send("Home Page");
 })
 
+app.post("/create",async(req,res)=> {
+    const {name,age,city,email} = req.body;
 
+    const data = await userPost.create({
+        name,
+        age,
+        city,
+        email
+    })
+    return res.status(200).json(data);
+})
+
+app.get("/view",async(req,res)=> {
+    try{
+        const data= await userPost.find({})
+        return res.status(200).json(data)
+    }catch(err) {
+        console.log(err);
+    }
+})
 
 
 const PORT = process.env.PORT || 8080
