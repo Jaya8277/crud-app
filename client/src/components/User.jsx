@@ -19,13 +19,41 @@ const User = () => {
         })
     }
 
+    const postData=()=> {
+        let obj ={
+            name:name,
+            age:age,
+            city:city,
+            email:email
+        }
+        axios.post("http://localhost:8080/create",obj).then((res)=> {
+           getData();
+        }).catch((err)=> {
+            console.log(err)
+        })
+    }
   return (
     <div>
         <input type="text" onChange={(e)=> setName(e.target.value)} placeholder='Enter Your Name'/>
         <input type="number" onChange={(e)=> setAge(e.target.value)} placeholder='Enter Your age'/>
         <input type="text" onChange={(e)=> setCity(e.target.value)} placeholder='Enter Your city'/>
         <input type="email" onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Your email'/>
-        {/* <button onClick={postData}>Add</button> */}
+        <button onClick={postData}>Add</button>
+
+        <div>
+            {
+                data.map((elem)=> {
+                    return (
+                        <>
+                        <h1>{elem.name}</h1>
+                        <h1>{elem.age}</h1>
+                         <h1>{elem.city}</h1>
+                          <h1>{elem.email}</h1>
+                        </>
+                    )
+                })
+            }
+        </div>
 
     </div>
   )
