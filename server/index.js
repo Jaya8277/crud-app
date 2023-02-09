@@ -34,6 +34,24 @@ app.get("/view",async(req,res)=> {
 })
 
 
+app.delete("/deleteuser/:id",async(req,res)=>{
+
+    try{
+        const {id}=req.params;
+const deleteuser=await userPost.findByIdAndDelete({_id:id})
+console.log(deleteuser);
+// res.status(201).json(deleteuser)
+res.status(200).send({
+    success:true,
+    message:"Data Deleted Succefully"
+})
+    }
+    catch(error){
+        res.status(404).json(error)
+    }
+})
+
+
 const PORT = process.env.PORT || 8080
 
 app.listen(PORT,(connection)=> {
